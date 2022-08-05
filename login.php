@@ -32,7 +32,13 @@
                     $_SESSION['access'] = $row['access'];
 
                     echo 'login successful';
-                    header('location:homepage.php');
+                    if($_SESSION['access'] == 'Viewer'){
+                        header('location:homepage.php');
+                    }
+                    else if($_SESSION['access'] == 'Admin'){
+                        header('location:homepageadmin.php');
+                    }
+                    
                 }
                 else{
                     echo 'Password is incorrect' . '<br >';
@@ -51,7 +57,7 @@
 
 <html>
     <head>
-        <title></title>
+        <title>Login Page</title>
     </head>
 
     <body>
