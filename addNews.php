@@ -39,20 +39,23 @@
         $subimagepath = "newsimage/" . $subimageName;
         $currentdatetime = date('Y-m-d H:i:s');
         
-        if(empty($mainimageName) && is_null($title) && is_null($description)){
-            $sql = "INSERT INTO news (title, shortdescription, mainimage, description, subimage, date) VALUES ('$title', '$shortdescription', '$mainimageName', '$description', '$subimageName', '$currentdatetime')";
+        if(!empty($mainimageName) && !is_null($title) && !is_null($description)){
+            $sql = "INSERT INTO news (title, shortdescription, mainimage, description, subimage, date) VALUES ('$title', '$shortdescription', '$mainimageName', '$description', '$subimageName', NOW())";
             if (mysqli_query($conn, $sql)) {
                 if(empty($subimageName)){
+                    echo 'subimage checking';
                     if(move_uploaded_file($_FILES['mainimage']['name'], $mainimagepath)){
                         echo "News Inserted Successfully";
                     }
                 }
                 else{
+                    echo 'subimage found';
                     if(move_uploaded_file($_FILES['mainimage']['name'], $mainimagepath) && move_uploaded_file($_FILES['subimage']['name'], $subimagepath)){
                         echo "News Inserted Successfully";
                     }
                 }
             } else {
+                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
                 echo "Some Error Occured";
             }
         }
