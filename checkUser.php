@@ -12,16 +12,10 @@ function checkUser()
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
-    $sql = "SELECT * FROM login";
+    $sql = "SELECT access FROM login";
     $result = mysqli_query($conn, $sql);
 
-    if (mysqli_num_rows($result) > 0) {
-        while($row = mysqli_fetch_assoc($result)) {
-            echo $row["id"]. " " . $row["username"] . $row["password"] . $row["access"] . "<br>";
-        }
-    } else {
-        echo "0 results";
-    }
-
+    $row = mysqli_fetch_assoc($result);
+    echo $row["access"] . "<br>";
 }
 ?>
