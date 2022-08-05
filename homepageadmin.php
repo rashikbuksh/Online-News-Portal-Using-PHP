@@ -14,6 +14,13 @@
         <title>Home Page For Admin</title>
     </head>
     <body>
+    <button id="addnewsbtn" class="float-left submit-button" >Add News</button>
 
+    
     </body>
+    <script type="text/javascript">
+    document.getElementById("addnewsbtn").onclick = function () {
+        location.href = "addNews.php";
+    };
+    </script>
 </html>

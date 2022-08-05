@@ -3,11 +3,11 @@ function checkUser()
 {
 
     $servername = "localhost";
-    $username = "root";
-    $password = "";
+    $dbusername = "root";
+    $dbpassword = "";
     $dbname = "onlinenewsportal";
 
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
+    $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
 
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
