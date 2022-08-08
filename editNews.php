@@ -40,6 +40,7 @@
         <input type="submit" name="submit" value="Submit" />
     </form>
     <?php
+    $id = $_GET['id'];
     if(isset($_POST['submit'])){
         $title = $_POST['title'];
         $shortdescription = $_POST['shortdescription'];
@@ -50,10 +51,10 @@
         $description = $_POST['description'];
         $subimageName = basename($_FILES["subimage"]["name"]);
         $subimagepath = $directory . $subimageName;
-        echo 'gg ' . $subimagepath . '<br>';
+        
         
         if(!empty($mainimageName) && !is_null($title) && !is_null($description)){
-            $sql = "INSERT INTO news (title, shortdescription, mainimage, description, subimage, date) VALUES ('$title', '$shortdescription', '$mainimageName', '$description', '$subimageName', NOW())";
+            $sql = "UPDATE news set title = '$title', shortdescription = '$shortdescription', mainimage = '$mainimageName', description = '$description', subimage = '$subimageName', date = NOW() where id = '$id'";
             if (mysqli_query($conn, $sql)) {
                 if(!empty($subimageName)){
                     echo '<br>subimage found';
@@ -67,7 +68,6 @@
                 else{
                     if(move_uploaded_file($_FILES['mainimage']['tmp_name'], $mainimagepath)){
                         echo "<br>News Inserted Successfully";
-                        header('location:showNews.php');
                     }
                 }
             } else {
