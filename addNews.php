@@ -30,28 +30,29 @@
     if(isset($_POST['submit'])){
         $title = $_POST['title'];
         $shortdescription = $_POST['shortdescription'];
+        $directory = "newsimage/";
         $mainimageName = basename($_FILES["mainimage"]["name"]);
-        $mainimagepath = "newsimage/" . $mainimageName;
-        echo 'gg ' . $mainimageName;
+        $mainimagepath = $directory . $mainimageName;
+        echo 'gg ' . $mainimagepath . '<br>';
         $description = $_POST['description'];
         $subimageName = basename($_FILES["subimage"]["name"]);
-        echo 'gg ' . $subimageName;
-        $subimagepath = "newsimage/" . $subimageName;
-        $currentdatetime = date('Y-m-d H:i:s');
+        $subimagepath = $directory . $subimageName;
+        echo 'gg ' . $subimagepath . '<br>';
         
         if(!empty($mainimageName) && !is_null($title) && !is_null($description)){
             $sql = "INSERT INTO news (title, shortdescription, mainimage, description, subimage, date) VALUES ('$title', '$shortdescription', '$mainimageName', '$description', '$subimageName', NOW())";
             if (mysqli_query($conn, $sql)) {
-                if(empty($subimageName)){
-                    echo 'subimage checking';
-                    if(move_uploaded_file($_FILES['mainimage']['name'], $mainimagepath)){
-                        echo "News Inserted Successfully";
+                if(!empty($subimageName)){
+                    echo '<br>subimage found';
+                    if(move_uploaded_file($_FILES['mainimage']['tmp_name'], $mainimagepath)){
+                        if(move_uploaded_file($_FILES['subimage']['tmp_name'], $subimagepath)){
+                            echo "<br>News Inserted Successfully";
+                        }
                     }
                 }
                 else{
-                    echo 'subimage found';
-                    if(move_uploaded_file($_FILES['mainimage']['name'], $mainimagepath) && move_uploaded_file($_FILES['subimage']['name'], $subimagepath)){
-                        echo "News Inserted Successfully";
+                    if(move_uploaded_file($_FILES['mainimage']['tmp_name'], $mainimagepath)){
+                        echo "<br>News Inserted Successfully";
                     }
                 }
             } else {
