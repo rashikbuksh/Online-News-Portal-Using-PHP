@@ -14,8 +14,8 @@
         <title>Home Page For Admin</title>
     </head>
     <body>
-    <button id="addnewsbtn" class="float-left submit-button" >Add News</button>
-    <button id="shownewsbtn" class="float-left submit-button" >Show News</button>
+    <button id="addnewsbtn" class="float-left submit-button">Add News</button>
+    <button id="shownewsbtn" class="float-left submit-button">Show News</button>
     
     </body>
     <script type="text/javascript">
