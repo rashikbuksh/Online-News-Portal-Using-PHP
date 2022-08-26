@@ -36,7 +36,7 @@
                         header('location:homepage.php');
                     }
                     else if($_SESSION['access'] == 'Admin'){
-                        header('location:homepageadmin.php');
+                        header('location:homepage.php');
                     }
                     
                 }

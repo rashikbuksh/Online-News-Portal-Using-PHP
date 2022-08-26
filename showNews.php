@@ -8,10 +8,6 @@
     else{
         header('location:login.php');
     }
-    
-    if($viewer == 'Viewer'){
-        header('location:homepage.php');
-    }
 
     $servername = "localhost";
     $dbusername = "root";
@@ -39,38 +35,52 @@
   </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="homepage.php">Online News Portal</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <div role="navigation">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="homepage.php">Online News Portal</a>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="homepage.php">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="homepage.php">Home</a>
+                </li>
+                <li class="nav-item">
+                    <?php
+                        if($viewer == 'Viewer'){
+                            
+                        }
+                        else if($viewer == 'Admin'){
+                            echo '<a class="nav-link" href="addNews.php">Add News</a>';
+                        }
+                    ?>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="addNews.php">Add News</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <?php
+                    if($loggedin == '1'){
+                        echo '<a class="btn btn-outline-success my-2 my-sm-0" href="logout.php">Logout</a>';
+                    }
+                    else{
+                        echo '<a class="btn btn-outline-success my-2 my-sm-0" href="login.php">Login</a>';
+                    }
+                ?>
+                </form>
+            </div>
+        </nav>
+    </div>
 <div class="table-responsive">
     <table class="table" align='center' border='1'>
         <thead class="thead-dark">
