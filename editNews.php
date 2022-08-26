@@ -29,6 +29,8 @@
     <form method="post" enctype="multipart/form-data">
         Title: 
         <input type="text" name="title" id="title" maxlength="100" /><br><br>
+        News Type: 
+        <input type="text" name="type" id="type" maxlength="100" /><br><br>
         Short Description: (optional)
         <input type="text" name="shortdescription" id="shortdescription" maxlength="255" /><br><br>
         Main Image:
@@ -43,6 +45,7 @@
     $id = $_GET['id'];
     if(isset($_POST['submit'])){
         $title = $_POST['title'];
+        $newstype = $_POST['type'];
         $shortdescription = $_POST['shortdescription'];
         $directory = "newsimage/";
         $mainimageName = basename($_FILES["mainimage"]["name"]);
@@ -53,8 +56,8 @@
         $subimagepath = $directory . $subimageName;
         
         
-        if(!empty($mainimageName) && !is_null($title) && !is_null($description)){
-            $sql = "UPDATE news set title = '$title', shortdescription = '$shortdescription', mainimage = '$mainimageName', description = '$description', subimage = '$subimageName', date = NOW() where id = '$id'";
+        if(!empty($mainimageName) && !is_null($title) && !is_null($newstype) && !is_null($description)){
+            $sql = "UPDATE news set title = '$title', shortdescription = '$shortdescription', mainimage = '$mainimageName', description = '$description', subimage = '$subimageName', date = NOW(), newstype='$newstype' where id = '$id'";
             if (mysqli_query($conn, $sql)) {
                 if(!empty($subimageName)){
                     echo '<br>subimage found';

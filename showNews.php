@@ -31,6 +31,7 @@
     <table align='center' border='1'>
         <tr>
             <th>Title</th>
+            <th>News Type</th>
             <th>Short Description</th>
             <th>Main Image</th>
             <th>Description</th>
@@ -46,6 +47,7 @@
                 while($row = mysqli_fetch_assoc($result)) {
                     echo "<tr>";
                     echo "<td>" . $row["title"] . "</td>";
+                    echo "<td>" . $row["newstype"] . "</td>";
                     echo "<td>" . $row["shortdescription"] . "</td>";
                     echo "<td><img src='newsimage/" . $row["mainimage"] . "' height='200' weight='200'></td>";
                     echo "<td>" . $row["description"] . "</td>";

@@ -29,6 +29,8 @@
     <form method="post" enctype="multipart/form-data">
         Title: 
         <input type="text" name="title" id="title" maxlength="100" /><br><br>
+        News Type: 
+        <input type="text" name="type" id="type" maxlength="100" /><br><br>
         Short Description: (optional)
         <input type="text" name="shortdescription" id="shortdescription" maxlength="255" /><br><br>
         Main Image:
@@ -42,6 +44,7 @@
     <?php
     if(isset($_POST['submit'])){
         $title = $_POST['title'];
+        $newstype = $_POST['type'];
         $shortdescription = $_POST['shortdescription'];
         $directory = "newsimage/";
         $mainimageName = basename($_FILES["mainimage"]["name"]);
@@ -52,8 +55,8 @@
         $subimagepath = $directory . $subimageName;
         echo 'gg ' . $subimagepath . '<br>';
         
-        if(!empty($mainimageName) && !is_null($title) && !is_null($description)){
-            $sql = "INSERT INTO news (title, shortdescription, mainimage, description, subimage, date) VALUES ('$title', '$shortdescription', '$mainimageName', '$description', '$subimageName', NOW())";
+        if(!empty($mainimageName) && !is_null($title) && !is_null($newstype) && !is_null($description)){
+            $sql = "INSERT INTO news (title, newstype, shortdescription, mainimage, description, subimage, date) VALUES ('$title', '$newstype', '$shortdescription', '$mainimageName', '$description', '$subimageName', NOW())";
             if (mysqli_query($conn, $sql)) {
                 if(!empty($subimageName)){
                     echo '<br>subimage found';
