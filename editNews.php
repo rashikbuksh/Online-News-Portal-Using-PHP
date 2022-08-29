@@ -25,21 +25,44 @@
         die("Connection failed: " . mysqli_connect_error());
     }
 
+    $id = $_GET['id'];
+    $sql = "SELECT * FROM news WHERE id = '$id'";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            $title = $row['title'];
+            $newstype = $row['newstype'];
+            $shortdescription = $row['shortdescription'];
+            $mainimage = $row['mainimage'];
+            $description = $row['description'];
+            $subimage = $row['subimage'];
+        }
+    }
+    else{
+        echo "0 results";
+    }
+
 ?>
     <form method="post" enctype="multipart/form-data">
         Title: 
-        <input type="text" name="title" id="title" maxlength="100" /><br><br>
+        <input type="text" name="title" id="title" maxlength="100" value="<?php echo $title ?>"/><br><br>
         News Type: 
-        <input type="text" name="type" id="type" maxlength="100" /><br><br>
+        <input type="text" name="type" id="type" maxlength="100" value="<?php echo $newstype ?>" /><br><br>
         Short Description: (optional)
-        <input type="text" name="shortdescription" id="shortdescription" maxlength="255" /><br><br>
+        <input type="text" name="shortdescription" id="shortdescription" maxlength="255" values="<?php echo $shortdescription ?>"/><br><br>
         Main Image:
-        <input type="file" name="mainimage" id="mainimage"><br><br>
+        <input type="file" name="mainimage" id="mainimage" values="<?php echo $mainimage ?>"><br><br>
         Description:
-        <textarea type="text" name="description" id="description"> </textarea><br><br>
+        <textarea type="text" name="description" id="description"><?php echo $description ?> </textarea><br><br>
         Sub-image: (optional)
-        <input type="file" name="subimage" id="subimage"><br><br>
+        <input type="file" name="subimage" id="subimage" values="<?php echo $subimage ?>"><br><br>
         <input type="submit" name="submit" value="Submit" />
+        <br>
+        Main Image:
+        <img src=newsimage/<?php echo $mainimage ?> height='200' weight='200'>
+        <br>
+        Sub-image:
+        <img src=newsimage/<?php echo $subimage ?> height='200' weight='200' alt="No Image">
     </form>
     <?php
     $id = $_GET['id'];
@@ -64,7 +87,7 @@
                     if(move_uploaded_file($_FILES['mainimage']['tmp_name'], $mainimagepath)){
                         if(move_uploaded_file($_FILES['subimage']['tmp_name'], $subimagepath)){
                             echo "<br>News Inserted Successfully";
-                            header('location:showNews.php');
+                            header('location:homepage.php');
                         }
                     }
                 }
@@ -77,6 +100,33 @@
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
                 echo "Some Error Occured";
             }
+        }
+        else if (empty($mainimageName) && !is_null($title) && !is_null($newstype) && !is_null($description)){
+            if(empty($subimageName)){
+                $sql = "UPDATE news set title = '$title', shortdescription = '$shortdescription', description = '$description', date = NOW(), newstype='$newstype' where id = '$id'";
+                if (mysqli_query($conn, $sql)) {
+                    echo "<br>News Inserted Successfully";
+                    header('location:homepage.php');
+                } else {
+                    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                    echo "Some Error Occured";
+                }
+            }
+            else{
+                $sql = "UPDATE news set title = '$title', shortdescription = '$shortdescription', description = '$description', subimage = '$subimageName', date = NOW(), newstype='$newstype' where id = '$id'";
+                if (mysqli_query($conn, $sql)) {
+                    if(move_uploaded_file($_FILES['subimage']['tmp_name'], $subimagepath)){
+                        echo "<br>News Inserted Successfully";
+                        header('location:homepage.php');
+                    }
+                } else {
+                    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                    echo "Some Error Occured";
+                }
+            }
+        }
+        else{
+            echo "Some Error Occured";
         }
     }
 
