@@ -2,6 +2,7 @@
     session_start();
     $loggedin = $_SESSION['loggedin'];
     $viewer = $_SESSION['access'];
+    $userid = $_SESSION['userid'];
     if($loggedin == '1'){
         echo "Welcome ".$_SESSION['username']. '<br><br>';
     }
