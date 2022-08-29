@@ -26,11 +26,18 @@
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    $id = $_GET['id'];
-    $sql = "DELETE FROM news WHERE id = '$id'";
+    $commentid = $_GET['commentid'];
+    $sql2 = "SELECT * FROM commentnews WHERE commentid = '$commentid'";
+    $result2 = mysqli_query($conn, $sql2);
+    if (mysqli_num_rows($result2) > 0) {
+        while($row = mysqli_fetch_assoc($result2)){
+            $newsid = $row['newsid'];
+        }
+    }
+    $sql = "DELETE FROM commentnews WHERE commentid = '$commentid'";
     if (mysqli_query($conn, $sql)) {
         echo "News Deleted Successfully";
-        header("location:showNews.php");
+        header("location:singleNews.php?id=$newsid");
     }
 
     else {

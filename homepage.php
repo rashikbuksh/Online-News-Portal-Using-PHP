@@ -2,6 +2,7 @@
     session_start();
     $loggedin = $_SESSION['loggedin'];
     $viewer = $_SESSION['access'];
+    $userid = $_SESSION['userid'];
     if($loggedin == '1'){
         
     }
@@ -116,7 +117,7 @@
                             echo "<td><a href='editNews.php?id=".$row["id"]."'>Edit</a></td>";
                             echo "<td><a href='deleteNews.php?id=".$row["id"]."'>Delete</a></td>";
                         }
-                        echo "<td><a href='singleNews.php?id=" . $row["id"] . "'>View</a></td>";
+                        echo "<td><a href='singleNews.php?id=".$row["id"]."'>View</a></td>";
                         echo "</tr>";
                     }
                 }

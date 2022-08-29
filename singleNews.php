@@ -2,15 +2,12 @@
     session_start();
     $loggedin = $_SESSION['loggedin'];
     $viewer = $_SESSION['access'];
+    $userid = $_SESSION['userid'];
     if($loggedin == '1'){
         
     }
     else{
         header('location:login.php');
-    }
-
-    if($viewer == 'Viewer'){
-        header('location:homepage.php');
     }
 
     $servername = "localhost";
@@ -94,7 +91,7 @@
             </div>
         </nav>
     </div>
-        <div class="table-responsive">
+    <div class="table-responsive">
     <table class="table" align='center' border='1'>
         <thead class="thead-dark">
             <tr>
@@ -112,27 +109,70 @@
                 $sql = "SELECT * FROM news WHERE id = '$id'";
                 $result = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result) > 0) {
-                        $row = mysqli_fetch_assoc($result);
-                        echo "<tr>";
-                        echo "<th scope='row'>" . $row["title"] . "</th>";
-                        echo "<td>" . $row["newstype"] . "</td>";
-                        echo "<td>" . $row["shortdescription"] . "</td>";
-                        echo "<td><img src='newsimage/" . $row["mainimage"] . "' height='200' weight='200'></td>";
-                        echo "<td>" . $row["description"] . "</td>";
-                        if(!empty($row["subimage"])){
-                            echo "<td><img src='newsimage/" . $row["subimage"] . "' height='200' weight='200'></td>";
-                        }
-                        else{
-                            echo "<td>No subimage</td>";
-                        }
-                        echo "<td>" . $row["date"] . "</td>";
-                        echo "</tr>";
-
+                    $row = mysqli_fetch_assoc($result);
+                    echo "<tr>";
+                    echo "<th scope='row'>" . $row["title"] . "</th>";
+                    echo "<td>" . $row["newstype"] . "</td>";
+                    echo "<td>" . $row["shortdescription"] . "</td>";
+                    echo "<td><img src='newsimage/" . $row["mainimage"] . "' height='200' weight='200'></td>";
+                    echo "<td>" . $row["description"] . "</td>";
+                    if(!empty($row["subimage"])){
+                        echo "<td><img src='newsimage/" . $row["subimage"] . "' height='200' weight='200'></td>";
+                    }
+                    else{
+                        echo "<td>No subimage</td>";
+                    }
+                    echo "<td>" . $row["date"] . "</td>";
+                    echo "</tr>";
                 }
             ?>
         </tbody>
     </table>
-</div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Comments</h5>
+                        <?php
+                            $sql = "SELECT * FROM commentnews WHERE newsid = '$id'";
+                            $result = mysqli_query($conn, $sql);
+                            if (mysqli_num_rows($result) > 0) {
+                                while($row = mysqli_fetch_assoc($result)) {
+                                    echo "<p class='card-text'>" . $row["message"] . "</p>";
+                                    echo "<small>" . $row["date"] . "</small>";
+                                    if($row["userid"] == $userid){
+                                        echo "<br><a href='deleteComment.php?commentid=" . $row["commentid"] . "'>Delete</a>";
+                                    }
+                                }
+                            }
+                        ?>
+                        <br>
+                        <form action="" method="post">
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Comment</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="message"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                        </form>
+                        <?php
+                            if(isset($_POST['submit'])){
+                                $comment = $_POST['message'];
+                                $sql = "INSERT INTO commentnews (message, newsid, date, userid) VALUES ('$comment', '$id', NOW(), '$userid')";
+                                if(mysqli_query($conn, $sql)){
+                                    echo "<script>alert('Comment added successfully')</script>";
+                                    echo "<script>window.location.href='singleNews.php?id=$id'</script>";
+                                }
+                                else{
+                                    echo "<script>alert('Error adding comment')</script>";
+                                }
+                            }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

@@ -3,6 +3,7 @@
 
     $_SESSION['loggedin'] = 0;
     $_SESSION['username'] = ' ';
+    $_SESSION['userid'] = ' ';
     $_SESSION['access']=' ';
 
     $servername = "localhost";
@@ -29,15 +30,11 @@
 
                     $_SESSION['loggedin'] = 1;
                     $_SESSION['username'] = $username;
+                    $_SESSION['userid'] = $row['id'];
                     $_SESSION['access'] = $row['access'];
 
                     echo 'login successful';
-                    if($_SESSION['access'] == 'Viewer'){
-                        header('location:homepage.php');
-                    }
-                    else if($_SESSION['access'] == 'Admin'){
-                        header('location:homepage.php');
-                    }
+                    header('location:homepage.php');
                     
                 }
                 else{
