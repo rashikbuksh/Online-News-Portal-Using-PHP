@@ -30,7 +30,7 @@
     $sql = "DELETE FROM news WHERE id = '$id'";
     if (mysqli_query($conn, $sql)) {
         echo "News Deleted Successfully";
-        header("location:showNews.php");
+        header("location:homepage.php");
     }
 
     else {
