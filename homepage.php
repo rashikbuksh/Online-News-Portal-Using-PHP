@@ -55,9 +55,10 @@
                 </li>
                 </div>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <form action="searchPage.php" class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-secondary" type="submit">Search</button>
+                
                 &nbsp;&nbsp;
                 <div class="dropdown show">
                     <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
