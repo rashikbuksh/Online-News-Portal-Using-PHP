@@ -115,14 +115,14 @@
                     if(move_uploaded_file($_FILES['mainimage']['tmp_name'], $mainimagepath)){
                         if(move_uploaded_file($_FILES['subimage']['tmp_name'], $subimagepath)){
                             echo "<br>News Inserted Successfully";
-                            header('location:showNews.php');
+                            header('location:homepage.php');
                         }
                     }
                 }
                 else{
                     if(move_uploaded_file($_FILES['mainimage']['tmp_name'], $mainimagepath)){
                         echo "<br>News Inserted Successfully";
-                        header('location:showNews.php');
+                        header('location:homepage.php');
                     }
                 }
             } else {

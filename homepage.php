@@ -74,57 +74,34 @@
             </div>
         </nav>
     </div>
-        <div class="table-responsive">
-    <table class="table" align='center' border='1'>
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Title</th>
-                <th scope="col">News Type</th>
-                <th scope="col">Short Description</th>
-                <th scope="col">Main Image</th>
-                <th scope="col">Description</th>
-                <th scope="col">Sub-image</th>
-                <th scope="col">Date</th>
-                <?php
-                    if($viewer == 'Admin'){
-                        echo '<th scope="col">Edit</th>';
-                        echo '<th scope="col">Delete</th>';
-                    }
-                ?>
-                <th scope="col">View</th>
-            </tr>
-        </thead>
-        <tbody>
+    <br>
+    <div class="container">
+        <div class="row">
+            
             <?php
-                $sql = "SELECT * FROM news";
+                $sql = "SELECT * FROM news ORDER BY date DESC";
                 $result = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result) > 0) {
                     while($row = mysqli_fetch_assoc($result)) {
-                        echo "<tr>";
-                        echo "<th scope='row'>" . $row["title"] . "</th>";
-                        echo "<td>" . $row["newstype"] . "</td>";
-                        echo "<td>" . $row["shortdescription"] . "</td>";
-                        echo "<td><img src='newsimage/" . $row["mainimage"] . "' height='200' weight='200'></td>";
-                        echo "<td>" . $row["description"] . "</td>";
-                        if(!empty($row["subimage"])){
-                            echo "<td><img src='newsimage/" . $row["subimage"] . "' height='200' weight='200'></td>";
-                        }
-                        else{
-                            echo "<td>No subimage</td>";
-                        }
-                        echo "<td>" . $row["date"] . "</td>";
+                        echo "<div class='col-lg-4 mb-4'>";
+                        echo "<div class='card' style='width: 18rem;'>";
+                        echo "<div class='card-header'>". $row["newstype"] ."</div>";
+                        echo "<img class='card-img-top' src='newsimage/" . $row["mainimage"] . "' alt='Card image cap' height='400' width='650'>";
+                        echo "<div class='card-body'>";
+                        echo "<h5 class='card-title'>" . $row["title"] . "</h5>";
+                        echo "<p class='card-text'>" . $row["description"] . "</p>";
+                        echo "<a class='card-link' href='singleNews.php?id=".$row["id"]."'>View</a>";
                         if($viewer == 'Admin'){
-                            echo "<td><a href='editNews.php?id=".$row["id"]."'>Edit</a></td>";
-                            echo "<td><a href='deleteNews.php?id=".$row["id"]."'>Delete</a></td>";
+                            echo "<a class='card-link' href='editNews.php?id=".$row["id"]."'>Edit</a>";
+                            echo "<a class='card-link' href='deleteNews.php?id=".$row["id"]."'>Delete</a>";
                         }
-                        echo "<td><a href='singleNews.php?id=".$row["id"]."'>View</a></td>";
-                        echo "</tr>";
+                        echo "</div>";
+                        echo "</div>";
+                        echo "</div>";
                     }
                 }
             ?>
-        </tbody>
-    </table>
-</div>
+        </div>
     </div>
     </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
