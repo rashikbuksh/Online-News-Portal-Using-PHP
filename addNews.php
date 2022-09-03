@@ -90,6 +90,7 @@
             <option value="Fashion">Fashion</option>
             <option value="Gadget">Gadget</option>
             <option value="Sports">Sports</option>
+            <option value="Education">Education</option>
         </select><br><br>
         Short Description: (optional)
         <input type="text" name="shortdescription" id="shortdescription" maxlength="255" /><br><br>
