@@ -80,7 +80,17 @@
         Title: 
         <input type="text" name="title" id="title" maxlength="100" /><br><br>
         News Type: 
-        <input type="text" name="type" id="type" maxlength="100" /><br><br>
+        <select class="form-select" aria-label="Default select example" name="type">
+            <option selected>News Type</option>
+            <option value="World">World</option>
+            <option value="International">International</option>
+            <option value="National">National</option>
+            <option value="Political">Political</option>
+            <option value="Lifestyle">Lifestyle</option>
+            <option value="Fashion">Fashion</option>
+            <option value="Gadget">Gadget</option>
+            <option value="Sports">Sports</option>
+        </select><br><br>
         Short Description: (optional)
         <input type="text" name="shortdescription" id="shortdescription" maxlength="255" /><br><br>
         Main Image:
