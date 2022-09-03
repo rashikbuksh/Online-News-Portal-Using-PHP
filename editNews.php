@@ -109,7 +109,8 @@
                     <option value='Lifestyle'>Lifestyle</option>
                     <option value='Fashion'>Fashion</option>
                     <option value='Gadget'>Gadget</option>
-                    <option value='Sports'>Sports</option>";
+                    <option value='Sports'>Sports</option>
+                    <option value='Education'>Education</option>";
                     break;
 
                 case "International":
@@ -120,7 +121,8 @@
                     <option value='Lifestyle'>Lifestyle</option>
                     <option value='Fashion'>Fashion</option>
                     <option value='Gadget'>Gadget</option>
-                    <option value='Sports'>Sports</option>";
+                    <option value='Sports'>Sports</option>
+                    <option value='Education'>Education</option>";
                     break;
 
                 case "National":
@@ -131,7 +133,8 @@
                     <option value='Lifestyle'>Lifestyle</option>
                     <option value='Fashion'>Fashion</option>
                     <option value='Gadget'>Gadget</option>
-                    <option value='Sports'>Sports</option>";
+                    <option value='Sports'>Sports</option>
+                    <option value='Education'>Education</option>";
                     break;
                 
                 case "Political":
@@ -142,7 +145,8 @@
                     <option value='Lifestyle'>Lifestyle</option>
                     <option value='Fashion'>Fashion</option>
                     <option value='Gadget'>Gadget</option>
-                    <option value='Sports'>Sports</option>";
+                    <option value='Sports'>Sports</option>
+                    <option value='Education'>Education</option>";
                     break;
 
                 case "Lifestyle":
@@ -153,7 +157,8 @@
                     <option value='Political'>Political</option>
                     <option value='Fashion'>Fashion</option>
                     <option value='Gadget'>Gadget</option>
-                    <option value='Sports'>Sports</option>";
+                    <option value='Sports'>Sports</option>
+                    <option value='Education'>Education</option>";
                     break;
 
                 case "Fashion":
@@ -164,7 +169,8 @@
                     <option value='Political'>Political</option>
                     <option value='Lifestyle'>Lifestyle</option>
                     <option value='Gadget'>Gadget</option>
-                    <option value='Sports'>Sports</option>";
+                    <option value='Sports'>Sports</option>
+                    <option value='Education'>Education</option>";
                     break;
 
                 case "Gadget":
@@ -175,7 +181,8 @@
                     <option value='Political'>Political</option>
                     <option value='Lifestyle'>Lifestyle</option>
                     <option value='Fashion'>Fashion</option>
-                    <option value='Sports'>Sports</option>";
+                    <option value='Sports'>Sports</option>
+                    <option value='Education'>Education</option>";
                     break;
 
                 case "Sports":
@@ -186,7 +193,20 @@
                     <option value='Political'>Political</option>
                     <option value='Lifestyle'>Lifestyle</option>
                     <option value='Fashion'>Fashion</option>
-                    <option value='Gadget'>Gadget</option>";
+                    <option value='Gadget'>Gadget</option>
+                    <option value='Education'>Education</option>";
+                    break;
+
+                case "Education":
+                    echo "<option value='Education' selected>Education</option>
+                    <option value='World'>World</option>
+                    <option value='International'>International</option>
+                    <option value='National'>National</option>
+                    <option value='Political'>Political</option>
+                    <option value='Lifestyle'>Lifestyle</option>
+                    <option value='Fashion'>Fashion</option>
+                    <option value='Gadget'>Gadget</option>
+                    <option value='Sports'>Sports</option>";
                     break;
             }
             ?>
