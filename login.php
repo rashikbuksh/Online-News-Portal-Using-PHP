@@ -74,7 +74,7 @@
         <div class="col-sm-3"></div>
         <div class="col-sm-6 jumbotron my-auto">
             <div class="d-flex justify-content-center">
-                <h1 class="display-4">Online News Portal</h1>
+                <h1 class="display-4"><a class="display-4" href="homepage.php" style="text-decoration: none;">Online News Portal</a></h1>
             </div>
             <form action="login.php" method="post">
             <div class="form-group">

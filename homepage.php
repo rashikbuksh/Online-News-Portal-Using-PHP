@@ -3,12 +3,6 @@
     $loggedin = $_SESSION['loggedin'];
     $viewer = $_SESSION['access'];
     $userid = $_SESSION['userid'];
-    if($loggedin == '1'){
-        
-    }
-    else{
-        header('location:login.php');
-    }
 
     $servername = "localhost";
     $dbusername = "root";
@@ -69,7 +63,14 @@
                 ?>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="login.php">Logout</a>
+                    <?php
+                        if($loggedin == '1'){
+                            echo '<a class="dropdown-item" href="login.php">Logout</a>';
+                        }
+                        else{
+                            echo '<a class="dropdown-item" href="login.php">Login</a>';
+                        }
+                    ?>
                     </div>
                 </form>
             </div>
