@@ -91,7 +91,7 @@
                         echo "<img class='card-img-top' src='newsimage/" . $row["mainimage"] . "' alt='Card image cap' height='400' width='650'>";
                         echo "<div class='card-body'>";
                         echo "<h5 class='card-title'>" . $row["title"] . "</h5>";
-                        echo "<p class='card-text'>" . $row["description"] . "</p>";
+                        echo "<p class='card-text'>" . $row["shortdescription"] . "</p>";
                         echo "<a class='card-link' href='singleNews.php?id=".$row["id"]."'>View</a>";
                         if($viewer == 'Admin'){
                             echo "<a class='card-link' href='editNews.php?id=".$row["id"]."'>Edit</a>";

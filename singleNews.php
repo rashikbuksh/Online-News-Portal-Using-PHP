@@ -134,11 +134,11 @@
                     <div class="card-body">
                         <h5 class="card-title">Comments</h5>
                         <?php
-                            $sql = "SELECT * FROM commentnews WHERE newsid = '$id'";
+                            $sql = "SELECT * FROM commentnews WHERE newsid = '$id' ORDER BY date ASC";
                             $result = mysqli_query($conn, $sql);
                             if (mysqli_num_rows($result) > 0) {
                                 while($row = mysqli_fetch_assoc($result)) {
-                                    echo "<p class='card-text'>" . $row["message"] . "</p>";
+                                    echo "<p class='card-text'><b>" . $row["username"] . "</b>: " . $row["message"] . "</p>";
                                     echo "<small>" . $row["date"] . "</small>";
                                     if($row["userid"] == $userid){
                                         echo "<br><a href='deleteComment.php?commentid=" . $row["commentid"] . "'>Delete</a>";
@@ -156,8 +156,9 @@
                         </form>
                         <?php
                             if(isset($_POST['submit'])){
+                                $username = $_SESSION['username'];
                                 $comment = $_POST['message'];
-                                $sql = "INSERT INTO commentnews (message, newsid, date, userid) VALUES ('$comment', '$id', NOW(), '$userid')";
+                                $sql = "INSERT INTO commentnews (message, newsid, date, userid, username) VALUES ('$comment', '$id', NOW(), '$userid', '$username')";
                                 if(mysqli_query($conn, $sql)){
                                     echo "<script>alert('Comment added successfully')</script>";
                                     echo "<script>window.location.href='singleNews.php?id=$id'</script>";

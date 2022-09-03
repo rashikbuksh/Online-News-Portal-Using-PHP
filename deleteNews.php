@@ -28,9 +28,15 @@
 
     $id = $_GET['id'];
     $sql = "DELETE FROM news WHERE id = '$id'";
+    $sqlComment = "DELETE FROM commentnews WHERE newsid = '$id'";
     if (mysqli_query($conn, $sql)) {
-        echo "News Deleted Successfully";
-        header("location:homepage.php");
+        if(mysqli_query($conn, $sqlComment)){
+            echo "News Deleted Successfully";
+            header("location:homepage.php");
+        }
+        else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
     }
 
     else {
