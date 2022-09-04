@@ -54,7 +54,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
-    <body>
+    <body class="bg-light">
 <div role="navigation">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
             <a class="navbar-brand" href="homepage.php">Online News Portal</a>
@@ -93,11 +93,22 @@
             </div>
         </nav>
     </div>
+    <div class="container">
+  <div class="jumbotron">
+    <h1 align="center">Edit News</h1>      
+</div>
+    </div>
+    <div class="container">
+    <div class="row">
+            <div class="col-md-12">
     <form method="post" enctype="multipart/form-data">
-        Title: 
-        <input type="text" name="title" id="title" maxlength="100" value="<?php echo $title ?>"/><br><br>
-        News Type: 
-        <select class="form-select" aria-label="Default select example" name="type">
+        <div class="form-group">
+        <label for="title">Title</label>
+        <input class="form-control" type="text" name="title" id="title" maxlength="100" value="<?php echo $title ?>"/>
+        </div>
+        <div class="form-group">
+        <label for="newstype">News Type</label>
+        <select id="newstype" class="form-control" aria-label="Default select example" name="type">
         <?php
             switch($newstype)
             {
@@ -211,23 +222,43 @@
             }
             ?>
             </select>
-        <br><br>
-        Short Description: (optional)
-        <input type="text" name="shortdescription" id="shortdescription" maxlength="255" values="<?php echo $shortdescription ?>"/><br><br>
-        Main Image:
-        <input type="file" name="mainimage" id="mainimage" values="<?php echo $mainimage ?>"><br><br>
-        Description:
-        <textarea type="text" name="description" id="description"><?php echo $description ?> </textarea><br><br>
-        Sub-image: (optional)
-        <input type="file" name="subimage" id="subimage" values="<?php echo $subimage ?>"><br><br>
-        <input type="submit" name="submit" value="Submit" />
+        </div>
+        <div class="form-group">
+        <label for="shortdescription">Short Description</label>
+        <input class="form-control" type="text" name="shortdescription" id="shortdescription" maxlength="100" value="<?php echo $shortdescription ?>"/>
+        </div>
+        <div class="form-group">
+        <label for="mainimage">Image-1</label>
+        <input type="file" class="form-control-file" name="mainimage" id="mainimage" values="<?php echo $mainimage ?>">
+        </div>
+        <div class="form-group">
+        <label for="description">Description</label>
+        <textarea type="text" class="form-control" name="description" id="description" rows="3"><?php echo $description ?> </textarea>
+        </div>
+        <div class="form-group">
+        <label for="subimage">Image-2</label>
+        <input type="file" class="form-control-file" name="subimage" id="subimage" values="<?php echo $subimage ?>">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2" name="submit">Submit</button>
         <br>
-        Main Image:
-        <img src=newsimage/<?php echo $mainimage ?> height='200' weight='200'>
-        <br>
-        Sub-image:
-        <img src=newsimage/<?php echo $subimage ?> height='200' weight='200' alt="No Image">
+            <i class="fas fa-h3">Previously Added Pictures</i>
+            <div class="form-group">
+            <img id="mainimage1" src=newsimage/<?php echo $mainimage ?> height='200' weight='200'>
+            </div>
+            <?php 
+            if(empty($subimage)){
+                echo "";
+            }
+            else{
+                echo "<div class='form-group'>
+                <img id='subimage1' src=newsimage/$subimage height='200' weight='200'>
+                </div>";
+            }
+            ?>
     </form>
+    </div>
+    </div>
+</div>
     <?php
     $id = $_GET['id'];
     if(isset($_POST['submit'])){
@@ -247,17 +278,15 @@
             $sql = "UPDATE news set title = '$title', shortdescription = '$shortdescription', mainimage = '$mainimageName', description = '$description', subimage = '$subimageName', date = NOW(), newstype='$newstype' where id = '$id'";
             if (mysqli_query($conn, $sql)) {
                 if(!empty($subimageName)){
-                    echo '<br>subimage found';
                     if(move_uploaded_file($_FILES['mainimage']['tmp_name'], $mainimagepath)){
                         if(move_uploaded_file($_FILES['subimage']['tmp_name'], $subimagepath)){
-                            echo "<br>News Inserted Successfully";
                             header('location:homepage.php');
                         }
                     }
                 }
                 else{
                     if(move_uploaded_file($_FILES['mainimage']['tmp_name'], $mainimagepath)){
-                        echo "<br>News Inserted Successfully";
+                        header('location:homepage.php');
                     }
                 }
             } else {
