@@ -78,21 +78,26 @@
     <?php
         if(isset($_GET['search'])){
             $searchItem = $_GET['search'];
-            $sql = "SELECT * FROM news WHERE title LIKE '%$searchItem%'";
+            $sql = "SELECT * FROM news WHERE title LIKE '%$searchItem%' OR shortdescription LIKE '%$searchItem%'";
             $result = mysqli_query($conn, $sql);
             $resultCheck = mysqli_num_rows($result);
             if($resultCheck > 0){
                 echo '<div><h3>'.$resultCheck.' news found...</h3><br>';
                 while($row = mysqli_fetch_assoc($result)){
                     $title = $row['title'];
+                    $shortdescription = $row['shortdescription'];
                     $id = $row['id'];
                     echo '<div class="card" style="width: 18rem;">
                     <div class="card-body">
                     <h5 class="card-title">'.$title.'</h5>
+                    <h6 class="card-title">'.$shortdescription.'</h6>
                     <a href="singleNews.php?id='.$id.'" class="btn btn-primary">View</a>
                     </div>
                     </div></div>';
                 }
+            }
+            else{
+                echo '<h3>No news found...</h3>';
             }
         }
                     
