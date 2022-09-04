@@ -4,6 +4,13 @@
     $viewer = $_SESSION['access'];
     $userid = $_SESSION['userid'];
 
+    if($loggedin == '1'){
+        
+    }
+    else{
+        header('location:login.php');
+    }
+
     $servername = "localhost";
     $dbusername = "root";
     $dbpassword = "";
