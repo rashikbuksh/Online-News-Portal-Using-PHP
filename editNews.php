@@ -56,7 +56,7 @@
   </head>
     <body>
 <div role="navigation">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
             <a class="navbar-brand" href="homepage.php">Online News Portal</a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
