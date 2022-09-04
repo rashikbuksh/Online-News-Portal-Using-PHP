@@ -37,7 +37,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
-    <body>
+    <body class="bg-light">
 <div role="navigation">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
             <a class="navbar-brand" href="homepage.php">Online News Portal</a>
@@ -76,12 +76,22 @@
             </div>
         </nav>
     </div>
-    <form method="post" enctype="multipart/form-data">
-        Title: 
-        <input type="text" name="title" id="title" maxlength="100" /><br><br>
-        News Type: 
-        <select class="form-select" aria-label="Default select example" name="type">
-            <option selected>News Type</option>
+    <div class="container">
+  <div class="jumbotron">
+    <h1 align="center">Add News</h1> 
+</div>
+    </div>
+<div class="container">
+    <div class="row">
+            <div class="col-md-12">
+            <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title">
+        </div>
+        <div class="form-group">
+            <label for="newstype">News Type</label>
+            <select class="form-control" id="newstype" name="type">
             <option value="World">World</option>
             <option value="International">International</option>
             <option value="National">National</option>
@@ -91,17 +101,29 @@
             <option value="Gadget">Gadget</option>
             <option value="Sports">Sports</option>
             <option value="Education">Education</option>
-        </select><br><br>
-        Short Description: (optional)
-        <input type="text" name="shortdescription" id="shortdescription" maxlength="255" /><br><br>
-        Main Image:
-        <input type="file" name="mainimage" id="mainimage"><br><br>
-        Description:
-        <textarea type="text" name="description" id="description"> </textarea><br><br>
-        Sub-image: (optional)
-        <input type="file" name="subimage" id="subimage"><br><br>
-        <input type="submit" name="submit" value="Submit" />
-    </form>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="shortdescription">Short Description</label>
+            <input type="text" class="form-control" id="shortdescription" name="shortdescription">
+        </div>
+        <div class="form-group">
+            <label for="mainimage">Image-1</label>
+            <input type="file" class="form-control-file" id="mainimage" name="mainimage">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="subimage">Image-2</label>
+            <input type="file" class="form-control-file" id="subimage" name="subimage">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2" name="submit">Submit</button>
+        </form>
+        </div>
+    </div>
+</div>
     <?php
     if(isset($_POST['submit'])){
         $title = $_POST['title'];
