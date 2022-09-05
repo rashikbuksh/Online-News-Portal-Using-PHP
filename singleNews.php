@@ -50,7 +50,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
-    <body>
+    <body class="bg-light">
     <div role="navigation">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
             <a class="navbar-brand" href="homepage.php">Online News Portal</a>
@@ -89,43 +89,31 @@
             </div>
         </nav>
     </div>
-    <div class="table-responsive">
-    <table class="table" align='center' border='1'>
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Title</th>
-                <th scope="col">News Type</th>
-                <th scope="col">Short Description</th>
-                <th scope="col">Main Image</th>
-                <th scope="col">Description</th>
-                <th scope="col">Sub-image</th>
-                <th scope="col">Date</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="container">
+    <div class="row">
+    <div class="col-md-12">
+        <div class="card text-center">
             <?php
                 $sql = "SELECT * FROM news WHERE id = '$id'";
                 $result = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result) > 0) {
                     $row = mysqli_fetch_assoc($result);
-                    echo "<tr>";
-                    echo "<th scope='row'>" . $row["title"] . "</th>";
-                    echo "<td>" . $row["newstype"] . "</td>";
-                    echo "<td>" . $row["shortdescription"] . "</td>";
-                    echo "<td><img src='newsimage/" . $row["mainimage"] . "' height='200' weight='200'></td>";
-                    echo "<td>" . $row["description"] . "</td>";
+                    echo "<img src='newsimage/".$row["mainimage"]."' class='card-img-top' alt='' height='700' width='900'>";
+                    echo "<div class='card-header'>".$row["newstype"]."</div>";
+                    echo "<div class='card-body'>";
+                    echo "<h5 class='card-title'>Title: ".$row["title"]."</h5>";
+                    echo "<p class='card-text'>".$row["shortdescription"]."</p>";
+                    echo "<p class='card-text'>".$row["description"]."</p>";
+                    echo "</div>";
                     if(!empty($row["subimage"])){
-                        echo "<td><img src='newsimage/" . $row["subimage"] . "' height='200' weight='200'></td>";
+                        echo "<img src='newsimage/".$row["subimage"]."' class='card-img-bottom'>";
                     }
-                    else{
-                        echo "<td>No subimage</td>";
-                    }
-                    echo "<td>" . $row["date"] . "</td>";
-                    echo "</tr>";
+                    echo "<div class='card-footer text-muted'>Posted On: ".$row["date"]."</div>";
                 }
             ?>
-        </tbody>
-    </table>
+        </div>
+        </div>
+    </div>
     </div>
     <div class="container">
         <div class="row">

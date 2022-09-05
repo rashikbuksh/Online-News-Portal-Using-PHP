@@ -142,7 +142,6 @@
             $sql = "INSERT INTO news (title, newstype, shortdescription, mainimage, description, subimage, date) VALUES ('$title', '$newstype', '$shortdescription', '$mainimageName', '$description', '$subimageName', NOW())";
             if (mysqli_query($conn, $sql)) {
                 if(!empty($subimageName)){
-                    echo '<br>subimage found';
                     if(move_uploaded_file($_FILES['mainimage']['tmp_name'], $mainimagepath)){
                         if(move_uploaded_file($_FILES['subimage']['tmp_name'], $subimagepath)){
                             echo "<br>News Inserted Successfully";

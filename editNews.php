@@ -268,25 +268,24 @@
         $directory = "newsimage/";
         $mainimageName = basename($_FILES["mainimage"]["name"]);
         $mainimagepath = $directory . $mainimageName;
-        echo 'gg ' . $mainimagepath . '<br>';
         $description = $_POST['description'];
         $subimageName = basename($_FILES["subimage"]["name"]);
         $subimagepath = $directory . $subimageName;
         
         
         if(!empty($mainimageName) && !is_null($title) && !is_null($newstype) && !is_null($description)){
-            $sql = "UPDATE news set title = '$title', shortdescription = '$shortdescription', mainimage = '$mainimageName', description = '$description', subimage = '$subimageName', date = NOW(), newstype='$newstype' where id = '$id'";
+            $sql = "UPDATE news set title = '$title', shortdescription = '$shortdescription', mainimage = '$mainimageName', description = '$description', subimage = '$subimageName', newstype='$newstype' where id = '$id'";
             if (mysqli_query($conn, $sql)) {
                 if(!empty($subimageName)){
                     if(move_uploaded_file($_FILES['mainimage']['tmp_name'], $mainimagepath)){
                         if(move_uploaded_file($_FILES['subimage']['tmp_name'], $subimagepath)){
-                            header('location:homepage.php');
+                            echo "<script>window.location.href='homepage.php'</script>";
                         }
                     }
                 }
                 else{
                     if(move_uploaded_file($_FILES['mainimage']['tmp_name'], $mainimagepath)){
-                        header('location:homepage.php');
+                        echo "<script>window.location.href='homepage.php'</script>";
                     }
                 }
             } else {
@@ -296,9 +295,8 @@
         }
         else if (empty($mainimageName) && !is_null($title) && !is_null($newstype) && !is_null($description)){
             if(empty($subimageName)){
-                $sql = "UPDATE news set title = '$title', shortdescription = '$shortdescription', description = '$description', date = NOW(), newstype='$newstype' where id = '$id'";
+                $sql = "UPDATE news set title = '$title', shortdescription = '$shortdescription', description = '$description', newstype='$newstype' where id = '$id'";
                 if (mysqli_query($conn, $sql)) {
-                    echo "<br>News Inserted Successfully";
                     header('location:homepage.php');
                 } else {
                     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
@@ -306,11 +304,10 @@
                 }
             }
             else{
-                $sql = "UPDATE news set title = '$title', shortdescription = '$shortdescription', description = '$description', subimage = '$subimageName', date = NOW(), newstype='$newstype' where id = '$id'";
+                $sql = "UPDATE news set title = '$title', shortdescription = '$shortdescription', description = '$description', subimage = '$subimageName', newstype='$newstype' where id = '$id'";
                 if (mysqli_query($conn, $sql)) {
                     if(move_uploaded_file($_FILES['subimage']['tmp_name'], $subimagepath)){
-                        echo "<br>News Inserted Successfully";
-                        header('location:homepage.php');
+                        echo "<script>window.location.href='homepage.php'</script>";
                     }
                 } else {
                     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
