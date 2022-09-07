@@ -262,14 +262,14 @@
     <?php
     $id = $_GET['id'];
     if(isset($_POST['submit'])){
-        $title = $_POST['title'];
+        $title = $conn->real_escape_string($_POST['title']);
         $newstype = $_POST['type'];
-        $shortdescription = $_POST['shortdescription'];
+        $shortdescription = $conn->real_escape_string($_POST['shortdescription']);
         $directory = "newsimage/";
-        $mainimageName = basename($_FILES["mainimage"]["name"]);
+        $mainimageName = $conn->real_escape_string(basename($_FILES["mainimage"]["name"]));
         $mainimagepath = $directory . $mainimageName;
-        $description = $_POST['description'];
-        $subimageName = basename($_FILES["subimage"]["name"]);
+        $description = $conn->real_escape_string($_POST['description']);
+        $subimageName = $conn->real_escape_string(basename($_FILES["subimage"]["name"]));
         $subimagepath = $directory . $subimageName;
         
         
