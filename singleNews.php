@@ -102,7 +102,6 @@
                     echo "<div class='card-header'>".$row["newstype"]."</div>";
                     echo "<div class='card-body'>";
                     echo "<h5 class='card-title'>Title: ".$row["title"]."</h5>";
-                    echo "<p class='card-text'>".$row["shortdescription"]."</p>";
                     echo "<p class='card-text'>".$row["description"]."</p>";
                     echo "</div>";
                     if(!empty($row["subimage"])){
