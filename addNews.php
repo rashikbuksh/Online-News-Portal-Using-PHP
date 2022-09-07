@@ -87,11 +87,11 @@
             <form method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" name="title">
+            <input type="text" class="form-control" id="title" name="title" maxlength="100" required>
         </div>
         <div class="form-group">
-            <label for="newstype">News Type</label>
-            <select class="form-control" id="newstype" name="type">
+            <label for="type">News Type</label>
+            <select class="form-control" id="type" name="type">
             <option value="World">World</option>
             <option value="International">International</option>
             <option value="National">National</option>
@@ -105,15 +105,15 @@
         </div>
         <div class="form-group">
             <label for="shortdescription">Short Description</label>
-            <input type="text" class="form-control" id="shortdescription" name="shortdescription">
+            <input type="text" class="form-control" id="shortdescription" name="shortdescription" maxlength="255">
         </div>
         <div class="form-group">
             <label for="mainimage">Image-1</label>
-            <input type="file" class="form-control-file" id="mainimage" name="mainimage">
+            <input type="file" class="form-control-file" id="mainimage" name="mainimage" required>
         </div>
         <div class="form-group">
             <label for="description">Description</label>
-            <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+            <textarea class="form-control" id="description" rows="3" name="description" required></textarea>
         </div>
         <div class="form-group">
             <label for="subimage">Image-2</label>
@@ -126,17 +126,18 @@
 </div>
     <?php
     if(isset($_POST['submit'])){
-        $title = $_POST['title'];
+        $title = $conn->real_escape_string($_POST['title']);
+        echo "".$title;
         $newstype = $_POST['type'];
-        $shortdescription = $_POST['shortdescription'];
+        $shortdescription = $conn->real_escape_string($_POST['shortdescription']);
         $directory = "newsimage/";
-        $mainimageName = basename($_FILES["mainimage"]["name"]);
+        $mainimageName = $conn->real_escape_string(basename($_FILES["mainimage"]["name"]));
         $mainimagepath = $directory . $mainimageName;
-        echo 'gg ' . $mainimagepath . '<br>';
-        $description = $_POST['description'];
-        $subimageName = basename($_FILES["subimage"]["name"]);
+        echo "<br>".$mainimagepath . '<br>';
+        $description = $conn->real_escape_string($_POST['description']);
+        $subimageName = $conn->real_escape_string(basename($_FILES["subimage"]["name"]));
         $subimagepath = $directory . $subimageName;
-        echo 'gg ' . $subimagepath . '<br>';
+        echo $subimagepath . '<br>';
         
         if(!empty($mainimageName) && !is_null($title) && !is_null($newstype) && !is_null($description)){
             $sql = "INSERT INTO news (title, newstype, shortdescription, mainimage, description, subimage, date) VALUES ('$title', '$newstype', '$shortdescription', '$mainimageName', '$description', '$subimageName', NOW())";
