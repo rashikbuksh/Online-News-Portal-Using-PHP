@@ -297,7 +297,7 @@
             if(empty($subimageName)){
                 $sql = "UPDATE news set title = '$title', shortdescription = '$shortdescription', description = '$description', newstype='$newstype' where id = '$id'";
                 if (mysqli_query($conn, $sql)) {
-                    header('location:homepage.php');
+                    echo "<script>window.location.href='homepage.php'</script>";
                 } else {
                     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
                     echo "Some Error Occured";
